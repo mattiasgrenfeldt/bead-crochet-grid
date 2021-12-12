@@ -1,0 +1,27 @@
+\documentclass[a4paper]{article}
+% https://tex.stackexchange.com/questions/16189/repeat-command-n-times
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+
+% https://math-linux.com/latex-26/faq/latex-faq/article/latex-how-to-insert-a-blank-or-empty-page-with-or-without-numbering-thispagestyle-newpage-usepackage-afterpage
+\usepackage{afterpage}
+\newcommand\myemptypage{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage
+}
+
+% https://tex.stackexchange.com/questions/136900/insert-a-full-page-image
+\usepackage{background}
+\backgroundsetup{
+    scale=1,
+    angle=0,
+    contents={\includegraphics[keepaspectratio,width=\paperwidth,height=\paperheight]{grid.png}}
+}
+
+\begin{document}
+\Repeat{5}{\myemptypage}
+\end{document}
